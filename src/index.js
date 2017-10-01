@@ -13,7 +13,7 @@ import './index.css';
 
 import App from './App';
 import configureStore from "./store/configureStore";
-import {initialState} from "./redusers/index";
+import {initialState} from "./reducers/index";
 
 const store = configureStore(initialState);
 

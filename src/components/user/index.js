@@ -11,9 +11,22 @@ class User extends Component {
 
     render() {
 
-        return (
+        const {user} = this.props.user;
+        return user.id ? (<div>
+            Sorry, there is no any data...
+            </div>)
+            :(
             <div>
-                <h3>User accout:</h3>
+                <img src={user.avatar_url} alt={`${user.login}'s avatar`}/>
+                <p>name: {user.name}</p>,
+                <p>followers: {user.followers}</p>,
+                <p>following: {user.following}</p>,
+                <p>created_at: {user.created_at}</p>,
+                <p>company: {user.company}</p>,
+                <p>email: {user.email}</p>,
+                <p>location: {user.location}</p>,
+                <p>blog: {user.blog}</p>,
+                <p>bio: {user.bio}</p>
             </div>
         );
     }
