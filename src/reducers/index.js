@@ -1,17 +1,15 @@
 // main reducer
 import {combineReducers} from 'redux'
+import {RECEIVE_USER_DATA, RECEIVE_USERS} from "../actions/index";
 
 export const initialState = {
     list: [],
-    user: {
-        id: '007',
-        name: 'no name'
-    }
+    user: {}
 };
 
 function list(state = initialState.list, action) {
     switch (action.type) {
-        case 'RECEIVE_USERS':
+        case RECEIVE_USERS:
             return action.payload.list;
         default:
             return [...state]
@@ -20,10 +18,10 @@ function list(state = initialState.list, action) {
 
 function user(state = initialState.user, action) {
     switch (action.type) {
-        case 'RECEIVE_USER_DATA':
+        case RECEIVE_USER_DATA:
             return action.payload.user;
         default:
-            return {...state, name: "default"};
+            return {...state};
     }
 }
 
@@ -31,4 +29,4 @@ export const rootReducer = combineReducers({
     list,
     user
 });
-
+0
