@@ -19,8 +19,14 @@ class List extends Component {
             <h3>User list:</h3>
             {this.props.listItems.map(item => (
                 <div key={item.id}>
-                    <img src={item.avatar_url} alt="avatar" width="100" height="100"/>
-                    <Link to={`user/${item.login}`}>{item.login}</Link>
+                    {/*todo: handle query size-param*/}
+
+                    <Link to={`user/${item.login}`}>
+                        {item.login}
+                        <br/>
+                        <img src={item.avatar_url + '&s=100'} alt="avatar" width="100" height="100"/>
+                    </Link>
+                    <a href={item.html_url}>github profile</a>
                     <br/>
                 </div>)
             )}
