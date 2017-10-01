@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+
+import {
+    Route,
+    Link
+} from 'react-router-dom'
+
 import logo from './logo.svg';
 import './App.css';
+import {List} from "./components/list/index";
+import {User} from "./components/user/index";
 
 class App extends Component {
   render() {
@@ -10,9 +18,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <nav className="App-intro">
+          <Link to="/list">Home</Link>
+        </nav>
+          <Route path="/list" component={List}/>
+          <Route path="/user/:userId" component={User}/>
       </div>
     );
   }
