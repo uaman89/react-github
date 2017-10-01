@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
-import {Link} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
+
+import List from './components/list'
+import User from "./components/user";
 
 import logo from './logo.svg';
 import './App.css';
-import Users from "./containers/users";
 
 class App extends Component {
     render() {
@@ -17,7 +19,8 @@ class App extends Component {
                 <nav className="App-intro">
                     <Link to="/list">Home</Link>
                 </nav>
-                <Users/>
+                <Route path="/list" render={props => <List {...props} />}/>
+                <Route path="/user/:userName" render={props => <User {...props} />}/>
             </div>
         );
     }
