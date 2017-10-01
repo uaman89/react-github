@@ -1,0 +1,11 @@
+.user-list {
+    text-align: left;
+    margin: 0 auto;
+    width: min-content;
+    white-space: nowrap;
+}
+
+.user-list > div {
+    border-bottom: 2px groove darkcyan;
+    margin-bottom: 5px;
+}

@@ -7,9 +7,6 @@ import {User} from "../components/user/index";
 import {withRouter, Route} from 'react-router-dom'
 
 class Users extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.dispatch(fetchUsers());
@@ -19,7 +16,7 @@ class Users extends Component {
         const {list, user} = this.props;
         return (
             <div>
-                <Route path="/list" component={List}/>
+                <Route path="/list" render={ props => <List {...props} listItems={list}/> } />
                 <Route path="/user/:userId" component={User}/>
             </div>
         );
@@ -35,7 +32,7 @@ Users.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        listItems: state.list,
+        list: state.list,
         user: state.user
     }
 }
