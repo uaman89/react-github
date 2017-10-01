@@ -7,8 +7,7 @@ import {
 
 import logo from './logo.svg';
 import './App.css';
-import {List} from "./components/list/index";
-import {User} from "./components/user/index";
+import Users from "./containers/users";
 
 class App extends Component {
   render() {
@@ -21,8 +20,7 @@ class App extends Component {
         <nav className="App-intro">
           <Link to="/list">Home</Link>
         </nav>
-          <Route path="/list" component={List}/>
-          <Route path="/user/:userId" component={User}/>
+          <Users/>
       </div>
     );
   }
