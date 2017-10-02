@@ -5,6 +5,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     font-family: Consolas, arial;
+    min-width: 1040px;
 }
 
 .list-item {
@@ -19,14 +20,22 @@
     background: #547397;
     color: #fff;
     margin: 0 2px;
-    padding-bottom: 1rem;
+    padding-top: 1rem;
 
 }
 
 .list-item .login {
     display: block;
-    padding: .5rem 0;
+    line-height: 2.5rem;
+    margin-top: -4px;
+    text-decoration: none !important;
+    text-transform: capitalize;
 }
+
+.list-item img{
+    vertical-align: bottom;
+}
+
 
 .link-to-github {
     font-size: .7rem;

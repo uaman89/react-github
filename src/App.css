@@ -5,15 +5,21 @@
 
 .App-header {
     background-color: #222;
-    height: 100px;
     padding: 20px;
     color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .App-title {
     font-size: 2em;
     display: flex;
     align-items: center;
+}
+
+.container{
+    padding: 0 1rem;
 }
 
 nav a{

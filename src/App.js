@@ -22,8 +22,10 @@ class App extends Component {
                     </nav>
 
                 </header>
-                <Route path="/list" render={props => <List {...props} />}/>
-                <Route path="/user/:userName" render={props => <User {...props} />}/>
+                <div className="container">
+                    <Route path="/list" render={props => <List {...props} />}/>
+                    <Route path="/user/:userName" render={props => <User {...props} />}/>
+                </div>
             </div>
         );
     }
