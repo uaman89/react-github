@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 import {fetchUsers} from "../../actions/index";
 
 import './list.css';
+import {ListItem} from "../list-item/index";
 
 class List extends Component {
 
@@ -15,22 +16,14 @@ class List extends Component {
 
     render() {
         console.log(`arguments:`, arguments);
-        return ( <div className="user-list">
+        return (
+        <div>
             <h3>User list:</h3>
-            {this.props.listItems.map(item => (
-                <div key={item.id}>
-                    {/*todo: handle query size-param*/}
-
-                    <Link to={`user/${item.login}`}>
-                        {item.login}
-                        <br/>
-                        <img src={item.avatar_url + '&s=100'} alt="avatar" width="100" height="100"/>
-                    </Link>
-                    <a href={item.html_url}>github profile</a>
-                    <br/>
-                </div>)
-            )}
-        </div>);
+            <div className="user-list">
+                {this.props.listItems.map(item => ListItem(item))}
+            </div>
+        </div>
+        );
     }
 }
 

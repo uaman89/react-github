@@ -1,11 +1,14 @@
 .user-list {
     text-align: left;
     margin: 0 auto;
-    width: min-content;
-    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.user-list > div {
+.user-list .list-item {
+    display: flex;
     border-bottom: 2px groove darkcyan;
     margin-bottom: 5px;
+    width: 20%;
 }
