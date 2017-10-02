@@ -18,10 +18,17 @@
 
 nav a{
     color: #eeeeee;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+nav a:hover{
+    background: #006060;
 }
 
 nav a.active{
     font-weight: bold;
+    background: black;
 }
 
 nav a:hover{

@@ -17,10 +17,10 @@ class App extends Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                         Welcome to React
                     </div>
-
                     <nav>
                         <NavLink activeClassName="active" to="/list">Home</NavLink>
                     </nav>
+
                 </header>
                 <Route path="/list" render={props => <List {...props} />}/>
                 <Route path="/user/:userName" render={props => <User {...props} />}/>
