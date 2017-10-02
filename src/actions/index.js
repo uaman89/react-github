@@ -5,12 +5,10 @@ export const RECEIVE_USERS = 'RECEIVE_USERS';
 export const RECEIVE_USER_DATA = 'RECEIVE_USER_DATA';
 
 
-function requestData() {
+function requestData(pageId) {
     return {
         type: REQUEST_DATA,
-        payload: {
-            isLoading: true
-        }
+        payload: { pageId }
     }
 }
 
@@ -18,7 +16,6 @@ function receiveUsers(list) {
     return {
         type: RECEIVE_USERS,
         payload: {
-            isLoading: false,
             list
         }
     }

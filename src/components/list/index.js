@@ -15,14 +15,19 @@ class List extends Component {
     }
 
     render() {
-        console.log(`arguments:`, arguments);
         return (
-        <div>
-            <h3>User list:</h3>
-            <div className="user-list">
-                {this.props.listItems.map(item => ListItem(item))}
+            <div>
+                <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
+
+                <div className="user-list">
+                    {this.props.listItems.length === 0 ? (
+                        'no any users here... No internet?'
+                    ) : (
+                        this.props.listItems.map(item => ListItem(item))
+                    )}
+                </div>
+
             </div>
-        </div>
         );
     }
 }
@@ -34,7 +39,8 @@ List.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        listItems: state.list
+        isFetching: state.list.isFetching,
+        listItems: state.list.items
     }
 }
 

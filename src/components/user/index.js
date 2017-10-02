@@ -10,23 +10,28 @@ class User extends Component {
     }
 
     render() {
-        const {user} = this.props;
-        return user.id ? (
-            <div className="user-profile">
-                <img src={user.avatar_url} alt={`${user.login}'s avatar`}/>
-                <p>name: {user.name}</p>,
-                <p>followers: {user.followers}</p>,
-                <p>following: {user.following}</p>,
-                <p>created_at: {user.created_at}</p>,
-                <p>company: {user.company}</p>,
-                <p>email: {user.email}</p>,
-                <p>location: {user.location}</p>,
-                <p>blog: {user.blog}</p>,
-                <p>bio: {user.bio}</p>
+        const {user, isFetching} = this.props;
+        return (
+            <div className="user">
+
+                <h1>User profile: {isFetching ? <code>is loading...</code> : null}</h1>
+
+                <div className="profile">
+                    <img className="avatar" src={user.avatar_url} alt={`${user.login}'s avatar`}/>
+                    <div className="details">
+                        <div><span>name: </span><span>{user.name}</span></div>
+                        <div><span>followers: </span><span>{user.followers}</span></div>
+                        <div><span>following: </span><span>{user.following}</span></div>
+                        <div><span>created_at: </span><span>{user.created_at}</span></div>
+                        <div><span>company: </span><span>{user.company}</span></div>
+                        <div><span>email: </span><span>{user.email}</span></div>
+                        <div><span>location: </span><span>{user.location}</span></div>
+                        <div><span>blog: </span><span>{user.blog}</span></div>
+                        <div><span>bio: </span><span>{user.bio}</span></div>
+                    </div>
+                </div>
             </div>
-        ) : (<div>
-            Sorry, there is no any data...
-        </div>);
+        );
     }
 }
 
@@ -37,7 +42,8 @@ User.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        isFetching: state.user.isFetching,
+        user: state.user.data
     }
 }
 
