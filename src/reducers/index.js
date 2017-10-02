@@ -1,6 +1,8 @@
 // main reducer
 import {combineReducers} from 'redux'
-import {RECEIVE_USER_DATA, RECEIVE_USERS, REQUEST_DATA} from "../actions/index";
+import {REQUEST_DATA} from "../actions/common";
+import {RECEIVE_USERS} from "../actions/list";
+import {RECEIVE_USER_DATA} from "../actions/user";
 
 export const initialState = {
 

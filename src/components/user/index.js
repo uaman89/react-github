@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
-import {fetchUserData} from "../../actions/index";
+import {fetchUserData} from "../../actions/user";
 
 import "./user.css"
 

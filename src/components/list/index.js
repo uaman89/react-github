@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
 
-import {fetchUsers} from "../../actions/index";
+import * as actions from "../../actions/list";
 
 import './list.css';
 import {ListItem} from "../list-item/index";
@@ -11,13 +11,29 @@ import {ListItem} from "../list-item/index";
 class List extends Component {
 
     componentDidMount() {
-        this.props.dispatch(fetchUsers());
+        this.props.dispatch(actions.fetchUsers());
     }
 
+    handlePageChange(e){
+        if (e.keyCode === 13 ){
+            let since = parseInt(e.target.value, 10);
+            if (!since || since < 0){
+                console.warn(`since should be an integer & greater the 0`);
+                return false;
+            }
+            console.log(`set since: ${since}`);
+            this.props.dispatch(actions.fetchUsers(since));
+        }
+    }
+    
     render() {
         return (
             <div>
                 <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
+
+                <label htmlFor="since">
+                    since: <input type="number" min={1} id="since" onKeyUp={(e)=>this.handlePageChange(e)}/>
+                </label>
 
                 <div className="user-list">
                     {this.props.listItems.length === 0 ? (
