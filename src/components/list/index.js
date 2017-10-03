@@ -11,18 +11,19 @@ import {ListItem} from "../list-item/index";
 class List extends Component {
 
     componentDidMount() {
-        this.props.dispatch(actions.fetchUsers());
+        this.props.dispatch(actions.fetchUsers(this.props.since));
     }
 
     handlePageChange(e){
         if (e.keyCode === 13 ){
             let since = parseInt(e.target.value, 10);
             if (!since || since < 0){
-                console.warn(`since should be an integer & greater the 0`);
+                e.target.value = 1;
+                console.warn(`since should be an positive integer`);
                 return false;
             }
             console.log(`set since: ${since}`);
-            this.props.dispatch(actions.fetchUsers(since));
+            this.props.dispatch(actions.setSinceParam(since));
         }
     }
     
@@ -32,7 +33,10 @@ class List extends Component {
                 <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
 
                 <label htmlFor="since">
-                    since: <input type="number" min={1} id="since" onKeyUp={(e)=>this.handlePageChange(e)}/>
+                    since:
+                    <input type="number" min={1} id="since"
+                           defaultValue={this.props.since}
+                           onKeyUp={(e)=>this.handlePageChange(e)}/>
                 </label>
 
                 <div className="user-list">
@@ -56,6 +60,7 @@ List.propTypes = {
 function mapStateToProps(state) {
     return {
         isFetching: state.list.isFetching,
+        since: state.list.since,
         listItems: state.list.items
     }
 }
