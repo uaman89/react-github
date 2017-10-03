@@ -8,6 +8,7 @@ export const initialState = {
 
     list: {
         isFetching: false,
+        since: null,
         pageSize: 30,
         items: []
     },

@@ -11,9 +11,10 @@ import './list.css';
 
 class List extends Component {
 
-    componentDidMount() {
+    constructor(props) {
+        super(props);
         const {pageSize, location} = this.props;
-        let since = this.props;
+        let {since} = this.props;
 
         const queryParams = queryString.parse(location.search);
 
@@ -39,6 +40,7 @@ class List extends Component {
             params.since = since;
             history.push(`${location.pathname}?${queryString.stringify(params)}#${location.hash}`);
 
+            this.props.dispatch(actions.setSinceParam(pageSize));
             this.props.dispatch(actions.fetchUsers(since, pageSize));
 
         }
@@ -56,23 +58,24 @@ class List extends Component {
             }
 
             this.props.dispatch(actions.setPageSize(pageSize));
-
             this.props.dispatch(actions.fetchUsers(since, pageSize));
         }
     }
 
 
     render() {
-
+        console.log(`render!`, this.props.since);
         return (
             <div>
                 <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
 
                 <label htmlFor="since">
                     since:
-                    <input type="number" min={1} id="since"
-                           defaultValue={this.props.since}
-                           onKeyUp={(e) => this.handleSinceParamChange(e)}/>
+                    { this.props.since ? ( //hack ala "timeout"
+                        <input type="number" min={1} id="since"
+                               defaultValue={this.props.since}
+                               onKeyUp={(e) => this.handleSinceParamChange(e)}/> ) : null
+                    }
                 </label>
 
                 <label htmlFor="pageSize">
