@@ -70,23 +70,25 @@ class List extends Component {
         return (
             <div>
 
-                <div className="pagination">
-                    <label htmlFor="since">
-                        since:
-                        <input type="number" min={0} id="since"
-                               defaultValue={this.valForStupidInput}
-                               onKeyUp={(e) => this.handleSinceParamChange(e)}/>
-                    </label>
+                <div class="list-header">
+                    <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
 
-                    <label htmlFor="pageSize">
-                        Items per page:
-                        <input type="number" min={1} id="pageSize"
-                               defaultValue={this.props.pageSize}
-                               onKeyUp={(e) => this.handlePageSizeChange(e)}/>
-                    </label>
+                    <div className="pagination">
+                        <label htmlFor="since">
+                            since:
+                            <input type="number" min={0} id="since"
+                                   defaultValue={this.valForStupidInput}
+                                   onKeyUp={(e) => this.handleSinceParamChange(e)}/>
+                        </label>
+
+                        <label htmlFor="pageSize">
+                            Items per page:
+                            <input type="number" min={1} id="pageSize"
+                                   defaultValue={this.props.pageSize}
+                                   onKeyUp={(e) => this.handlePageSizeChange(e)}/>
+                        </label>
+                    </div>
                 </div>
-
-                <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
 
                 <div className="user-list">
                     {this.props.listItems.length === 0 ? (

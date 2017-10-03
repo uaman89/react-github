@@ -5,7 +5,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     font-family: Consolas, arial;
-    min-width: 1040px;
 }
 
 .list-item {
@@ -32,12 +31,51 @@
     text-transform: capitalize;
 }
 
-.list-item img{
+.list-item img {
     vertical-align: bottom;
 }
-
 
 .link-to-github {
     font-size: .7rem;
     padding: .15rem 0;
 }
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination label input {
+    width: 6em;
+    text-align: center;
+    margin-left: 1em;
+    border: 1px solid #547397;
+    padding: .5rem;
+}
+
+.pagination label:first-child {
+    margin-right: 2rem;
+}
+
+@media (max-width: 1280px) {
+    .list-item {
+        width: 20%;
+    }
+}
+@media (max-width: 1024px) {
+    .list-item {
+        width: 25%;
+    }
+}
+
+@media (max-width: 768px) {
+    .list-item {
+        width: 33.3%;
+    }
+}
+
