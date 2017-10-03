@@ -2,31 +2,48 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
+import * as queryString from 'query-string'
 
 import * as actions from "../../actions/list";
 
-import './list.css';
 import {ListItem} from "../list-item/index";
+import './list.css';
 
 class List extends Component {
 
     componentDidMount() {
-        this.props.dispatch(actions.fetchUsers(this.props.since));
-    }
+        const {pageSize, location} = this.props;
+        let since = this.props;
 
-    handlePageChange(e){
-        if (e.keyCode === 13 ){
-            let since = parseInt(e.target.value, 10);
-            if (!since || since < 0){
-                e.target.value = 1;
-                console.warn(`since should be an positive integer`);
-                return false;
-            }
-            console.log(`set since: ${since}`);
+        const queryParams = queryString.parse(location.search);
+
+        if (queryParams.since) {
+            since = parseInt( queryParams.since, 10 );
             this.props.dispatch(actions.setSinceParam(since));
         }
+
+        this.props.dispatch(actions.fetchUsers(since, pageSize));
     }
-    
+
+    handlePageSizeChange(e) {
+        const {since} = this.props;
+
+        if (e.keyCode === 13) {
+
+            let pageSize = parseInt(e.target.value, 10);
+            if (!pageSize || pageSize < 0) {
+                e.target.value = 1;
+                console.warn(`pageSize should be an positive integer`);
+                return false;
+            }
+
+            this.props.dispatch(actions.setPageSize(pageSize));
+
+            this.props.dispatch(actions.fetchUsers(since, pageSize));
+        }
+    }
+
+
     render() {
         return (
             <div>
@@ -36,7 +53,14 @@ class List extends Component {
                     since:
                     <input type="number" min={1} id="since"
                            defaultValue={this.props.since}
-                           onKeyUp={(e)=>this.handlePageChange(e)}/>
+                           onKeyUp={(e) => this.handlePageChange(e)}/>
+                </label>
+
+                <label htmlFor="pageSize">
+                    Items per page:
+                    <input type="number" min={10} id="pageSize"
+                           defaultValue={this.props.pageSize}
+                           onKeyUp={(e) => this.handlePageSizeChange(e)}/>
                 </label>
 
                 <div className="user-list">
@@ -61,6 +85,7 @@ function mapStateToProps(state) {
     return {
         isFetching: state.list.isFetching,
         since: state.list.since,
+        pageSize: state.list.pageSize,
         listItems: state.list.items
     }
 }

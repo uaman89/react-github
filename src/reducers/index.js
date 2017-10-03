@@ -1,14 +1,14 @@
 // main reducer
 import {combineReducers} from 'redux'
 import {REQUEST_DATA} from "../actions/common";
-import {RECEIVE_USERS, SET_SINCE_PARAM} from "../actions/list";
+import {RECEIVE_USERS, SET_PAGE_SIZE, SET_SINCE_PARAM} from "../actions/list";
 import {RECEIVE_USER_DATA} from "../actions/user";
 
 export const initialState = {
 
     list: {
         isFetching: false,
-        since: 0,
+        pageSize: 0,
         items: []
     },
     user: {
@@ -20,17 +20,20 @@ export const initialState = {
 function list(state = initialState.list, action) {
     switch (action.type) {
         case REQUEST_DATA:
-            return {...state, isFetching: true}
+            return {...state, isFetching: true};
 
         case RECEIVE_USERS:
             return {
                 ...state,
                 isFetching: false,
                 items: action.payload.list
-            }
+            };
+
+        case SET_PAGE_SIZE:
+            return {...state, pageSize: action.payload};
 
         case SET_SINCE_PARAM:
-            return {...state, since: action.payload}
+            return {...state, since: action.payload};
 
         default:
             return state

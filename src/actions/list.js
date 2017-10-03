@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 import {requestData} from "./common";
 
 export const RECEIVE_USERS = 'RECEIVE_USERS';
+export const SET_PAGE_SIZE = 'SET_PAGE_SIZE';
 export const SET_SINCE_PARAM = 'SET_SINCE_PARAM';
 
 function receiveUsers(list) {
@@ -13,12 +14,12 @@ function receiveUsers(list) {
     }
 }
 
-export function fetchUsers(since = null) {
+export function fetchUsers(since = null, pageSize = null) {
     return dispatch => {
 
         dispatch(requestData());
 
-        return fetch(`https://api.github.com/users?since=${since}`)
+        return fetch(`https://api.github.com/users?since=${since}&per_page=${pageSize}`)
             .then(response => response.json())
             .then(
                 json => dispatch(receiveUsers(json)),
@@ -27,14 +28,16 @@ export function fetchUsers(since = null) {
     }
 }
 
+export function setPageSize(pageSize = 0) {
+    return {
+        type: SET_PAGE_SIZE,
+        payload: pageSize
+    }
+}
+
 export function setSinceParam(since = 0) {
-    return dispatch => {
-
-        dispatch(fetchUsers(since));
-
-        dispatch({
-            type: SET_SINCE_PARAM,
-            payload: since
-        });
+    return {
+        type: SET_SINCE_PARAM,
+        payload: since
     }
 }
