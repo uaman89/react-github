@@ -8,7 +8,7 @@ export const initialState = {
 
     list: {
         isFetching: false,
-        pageSize: 0,
+        pageSize: 30,
         items: []
     },
     user: {

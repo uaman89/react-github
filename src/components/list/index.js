@@ -18,11 +18,30 @@ class List extends Component {
         const queryParams = queryString.parse(location.search);
 
         if (queryParams.since) {
-            since = parseInt( queryParams.since, 10 );
+            since = parseInt(queryParams.since, 10);
             this.props.dispatch(actions.setSinceParam(since));
         }
 
         this.props.dispatch(actions.fetchUsers(since, pageSize));
+
+    }
+
+    handleSinceParamChange(e) {
+        if (e.keyCode === 13) {
+            let since = parseInt(e.target.value, 10);
+            if (!since || since < 0) {
+                console.warn(`since should be an positive integer`);
+                return false;
+            }
+
+            const {history, location, pageSize} = this.props;
+            const params = queryString.parse(location.search);
+            params.since = since;
+            history.push(`${location.pathname}?${queryString.stringify(params)}#${location.hash}`);
+
+            this.props.dispatch(actions.fetchUsers(since, pageSize));
+
+        }
     }
 
     handlePageSizeChange(e) {
@@ -32,7 +51,6 @@ class List extends Component {
 
             let pageSize = parseInt(e.target.value, 10);
             if (!pageSize || pageSize < 0) {
-                e.target.value = 1;
                 console.warn(`pageSize should be an positive integer`);
                 return false;
             }
@@ -45,6 +63,7 @@ class List extends Component {
 
 
     render() {
+
         return (
             <div>
                 <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
@@ -53,12 +72,12 @@ class List extends Component {
                     since:
                     <input type="number" min={1} id="since"
                            defaultValue={this.props.since}
-                           onKeyUp={(e) => this.handlePageChange(e)}/>
+                           onKeyUp={(e) => this.handleSinceParamChange(e)}/>
                 </label>
 
                 <label htmlFor="pageSize">
                     Items per page:
-                    <input type="number" min={10} id="pageSize"
+                    <input type="number" min={1} id="pageSize"
                            defaultValue={this.props.pageSize}
                            onKeyUp={(e) => this.handlePageSizeChange(e)}/>
                 </label>

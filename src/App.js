@@ -10,6 +10,9 @@ import './App.css';
 
 class App extends Component {
     render() {
+        let s = 100;
+        setTimeout(()=> s = 200, 3000);
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -18,7 +21,7 @@ class App extends Component {
                         Welcome to React
                     </div>
                     <nav>
-                        <NavLink activeClassName="active" to="/list">Home</NavLink>
+                        <NavLink activeClassName="active" to="/list"> &gt; User list</NavLink>
                     </nav>
 
                 </header>
