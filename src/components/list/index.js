@@ -11,6 +11,8 @@ import './list.css';
 
 class List extends Component {
 
+    valForStupidInput;
+
     constructor(props) {
         super(props);
         const {pageSize, location} = this.props;
@@ -22,7 +24,7 @@ class List extends Component {
             since = parseInt(queryParams.since, 10);
             this.props.dispatch(actions.setSinceParam(since));
         }
-
+        this.valForStupidInput = since || 0; //hack: partII
         this.props.dispatch(actions.fetchUsers(since, pageSize));
 
     }
@@ -67,23 +69,24 @@ class List extends Component {
         console.log(`render!`, this.props.since);
         return (
             <div>
+
+                <div className="pagination">
+                    <label htmlFor="since">
+                        since:
+                        <input type="number" min={0} id="since"
+                               defaultValue={this.valForStupidInput}
+                               onKeyUp={(e) => this.handleSinceParamChange(e)}/>
+                    </label>
+
+                    <label htmlFor="pageSize">
+                        Items per page:
+                        <input type="number" min={1} id="pageSize"
+                               defaultValue={this.props.pageSize}
+                               onKeyUp={(e) => this.handlePageSizeChange(e)}/>
+                    </label>
+                </div>
+
                 <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
-
-                <label htmlFor="since">
-                    since:
-                    { this.props.since ? ( //hack ala "timeout"
-                        <input type="number" min={1} id="since"
-                               defaultValue={this.props.since}
-                               onKeyUp={(e) => this.handleSinceParamChange(e)}/> ) : null
-                    }
-                </label>
-
-                <label htmlFor="pageSize">
-                    Items per page:
-                    <input type="number" min={1} id="pageSize"
-                           defaultValue={this.props.pageSize}
-                           onKeyUp={(e) => this.handlePageSizeChange(e)}/>
-                </label>
 
                 <div className="user-list">
                     {this.props.listItems.length === 0 ? (
