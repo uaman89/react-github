@@ -70,7 +70,7 @@ class List extends Component {
         return (
             <div>
 
-                <div class="list-header">
+                <div className="list-header">
                     <h1>User list: {this.props.isFetching ? 'is loading...' : null}</h1>
 
                     <div className="pagination">
