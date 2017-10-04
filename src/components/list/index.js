@@ -42,7 +42,7 @@ class List extends Component {
             params.since = since;
             history.push(`${location.pathname}?${queryString.stringify(params)}#${location.hash}`);
 
-            this.props.dispatch(actions.setSinceParam(pageSize));
+            this.props.dispatch(actions.setSinceParam(since));
             this.props.dispatch(actions.fetchUsers(since, pageSize));
 
         }
