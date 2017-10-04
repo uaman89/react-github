@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Route, NavLink} from 'react-router-dom'
+import {Route, NavLink, Redirect} from 'react-router-dom'
 
 import List from './components/list'
 import User from "./components/user";
@@ -25,6 +25,7 @@ class App extends Component {
                 <div className="container">
                     <Route path="/list" render={props => <List {...props} />}/>
                     <Route path="/user/:userName" render={props => <User {...props} />}/>
+                    <Route exact path="/" render={() => <Redirect to="/list"/>}/>
                 </div>
             </div>
         );
