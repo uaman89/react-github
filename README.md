@@ -1,7 +1,7 @@
 # Github users - test task
 
 A single page application, which allows to get list of github users. 
-Using React, ES2015 and Redux is required.
+Using React, ES6 and Redux is used
 
 ## Quick start
 
